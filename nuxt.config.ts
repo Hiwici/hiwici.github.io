@@ -12,5 +12,12 @@ export default defineNuxtConfig({
     ],
   },
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@tresjs/nuxt', '@pinia/nuxt'],
+
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('tres-'),
+      // isCustomElement: tag => tag.startsWith('Tres') || tag.startsWith('The')
+    }
+  }
 })
