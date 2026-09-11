@@ -2,6 +2,14 @@
 import type { Mesh, PlaneGeometry, BufferAttribute } from 'three'
 import { Vector3, DoubleSide } from 'three'
 
+/** Props */
+interface Props {
+  color?: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  color: '#38bdf8',
+})
+
 /** Ref Element Properties */
 const refElPlane = ref<Mesh>()
 const refElGeometry = ref<PlaneGeometry>()
@@ -72,6 +80,6 @@ onBeforeRender(({ elapsed }) => {
     <TresPlaneGeometry ref="refElGeometry" :args="[300, 300, 32, 32]" />
 
     <!-- Light-blue toon material -->
-    <TresMeshToonMaterial color="#38bdf8" :side="DoubleSide" />
+    <TresMeshToonMaterial :color="props.color" :side="DoubleSide" />
   </TresMesh>
 </template>

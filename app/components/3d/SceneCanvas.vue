@@ -5,8 +5,12 @@ import { Vector3 } from 'three'
 import AnimeCharacter from './AnimeCharacter.vue'
 import AnimeCloud from './AnimeCloud.vue'
 import AnimeOcean from './AnimeOcean.vue'
-import AnimeSun from './AnimeSun.vue'
+// import AnimeSun from './AnimeSun.vue'
+import AnimeSunAndStars from './AnimeSunAndStars.vue'
 import MapGrid from './MapGrid.vue'
+
+/** Composables */
+const { timeState } = useTimeOfDay()
 
 /** Tres Data */
 const cameraPosition = new Vector3(0, 10, 25)
@@ -34,6 +38,17 @@ const cloudLayers: Array<{
   { id: 'far-2', position: [-2, 16.1, -46], scale: 1.2, speed: 0.34 },
   { id: 'far-3', position: [54, 18.4, -58], scale: 1.1, speed: 0.3 },
 ]
+
+/** Computed Properties */
+const computedAmbientColor = computed(() => timeState.ambientColor)
+const computedAmbientIntensity = computed(() => timeState.ambientIntensity)
+const computedSunColor = computed(() => timeState.sunColor)
+const computedSunIntensity = computed(() => timeState.sunIntensity)
+const computedSunPosition = computed(() => {
+  const { x, y, z } = timeState.sunPosition
+  return new Vector3(x, y, z)
+})
+const computedClearColor = computed(() => timeState.clearColor)
 </script>
 
 <template>
@@ -59,31 +74,30 @@ const cloudLayers: Array<{
 
     <!-- 3. Lighting: bright anime-style tone -->
     <!-- Ambient light: keep shadows slightly sky-tinted and avoid crushed dark areas -->
-    <TresAmbientLight :intensity="1.1" color="#f0f9ff" />
+    <TresAmbientLight :color="computedAmbientColor" :intensity="computedAmbientIntensity" />
 
     <!-- Main directional sunlight: aligned with sunPosition for warm golden light -->
     <TresDirectionalLight
-      :position="sunPosition"
-      :intensity="2.2"
-      color="#fef3c7"
+      :position="computedSunPosition"
+      :intensity="computedSunIntensity"
+      :color="computedSunColor"
       cast-shadow
       :shadow-mapSize-width="1024"
       :shadow-mapSize-height="1024"
     />
 
-    <!-- Ocean visible in the foreground; distant fog blends sea into sky and softens horizon edges -->
-    <TresFog color="#bae6fd" :near="35" :far="90" />
-    <!-- <TresFog :color="'#E0F2FE'" :near="40" :far="100" /> -->
+    <!-- 4. Ocean visible in the foreground; distant fog blends sea into sky and softens horizon edges -->
+    <TresFog :color="computedClearColor" :near="35" :far="90" />
 
     <!-- 5. 3D Content Load Area (use Suspense for async loading) -->
     <Suspense>
       <template #default>
         <TresGroup>
-          <!-- Sunlight and glowing dust particle component -->
-          <AnimeSun :position="[25, 35, -40]" />
+          <!-- Sun and stars component -->
+          <AnimeSunAndStars />
 
           <!-- 3D cartoon ocean surface -->
-          <AnimeOcean />
+          <AnimeOcean :color="timeState.oceanColor" />
 
           <!-- Layered cloud placement with depth-based parallax -->
           <AnimeCloud

@@ -22,6 +22,9 @@ const emit = defineEmits<{
 /** Ref Properties */
 const refIsHover = ref(false)
 
+/** Composables */
+const { isOpen } = useTileModal()
+
 /**
  * Handles the pointer enter event on the hexagon. Sets the hover state to true and changes the cursor to a pointer.
  */
@@ -59,6 +62,9 @@ const computedMeshHexPosition = computed(() => {
   return new Vector3(0, 0, 0)
   // return new Vector3(0, refIsHover.value || props.is_selected ? 0.3 : 0, 0)
 })
+const computedShouldShowTitle = computed(() => {
+  return !isOpen.value
+})
 </script>
 
 <template>
@@ -82,6 +88,7 @@ const computedMeshHexPosition = computed(() => {
 
     <!-- 3D Floating Title -->
     <Html
+      v-if="computedShouldShowTitle"
       :position="[0, refIsHover || props.is_selected ? 1.5 : 1.2, 0]"
       center
       transform

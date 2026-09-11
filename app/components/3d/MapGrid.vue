@@ -13,6 +13,7 @@ interface TileData {
 
 /** Composables */
 const { moveTo, refIsMoving } = useCharacterController()
+const { openModal } = useTileModal()
 
 /** Constant Data */
 const HEX_RADIUS = 2 // Consistent with the top radius of CatanHex
@@ -43,12 +44,18 @@ const handleTileClick = (tile: TileData) => {
   // Calculate the target world coordinates
   // (which can be passed to character movement logic or camera focusing in the future).
   const targetWorldPos = hexToWorld(tile.q, tile.r)
-  console.log(`點擊了 ${tile.title}，目標座標：`, targetWorldPos)
 
-  // 執行角色移動動畫，並在抵達後觸發 UI 打開
+  // Execute character movement animation, and trigger UI opening upon arrival.
   moveTo(targetWorldPos, () => {
-    console.log(`角色已抵達 ${tile.title}，打開詳細 UI！`)
-    // TODO: 開啟 UI 雙欄視窗 (如 openModal(tile.id))
+    openModal({
+      id: tile.id,
+      title: tile.title,
+      subtitle: '',
+      type: tile.id as 'about' | 'skills' | 'projects' | 'contact',
+      badgeText: '',
+      characterQuote: '',
+      expression: 'happy',
+    })
   })
 }
 </script>
