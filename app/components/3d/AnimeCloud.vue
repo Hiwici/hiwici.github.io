@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 /** Ref Element Properties */
 const refElCloudGroup = ref<Group>()
+const refUpdateAccumulator = ref(0)
 
 /** Tres Data */
 const cloudMeshPosition1 = new Vector3(0, 0, 0)
@@ -27,7 +28,14 @@ const { onBeforeRender } = useLoop()
 // Slow cloud drifting animation
 onBeforeRender(({ delta }) => {
   if (!refElCloudGroup.value) return
-  refElCloudGroup.value.position.x += delta * props.speed
+
+  // Update at ~30 FPS to reduce CPU load with many cloud instances.
+  refUpdateAccumulator.value += delta
+  if (refUpdateAccumulator.value < 1 / 30) return
+
+  const step = refUpdateAccumulator.value
+  refUpdateAccumulator.value = 0
+  refElCloudGroup.value.position.x += step * props.speed
 
   // Reset to the left side when the cloud drifts too far
   if (refElCloudGroup.value.position.x > 80) {

@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <div class="grid">
-    Here
-  </div>
+  <div class="grid">Here</div>
 </template>

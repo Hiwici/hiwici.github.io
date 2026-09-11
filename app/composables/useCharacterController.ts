@@ -5,7 +5,9 @@ import gsap from 'gsap'
 const refPosition = ref<[number, number, number]>([0, 0.3, 0]) // [X, Y, Z], 0.3 Height offset of the hexagonal base
 const refRotationY = ref<number>(0)
 const refIsMoving = ref<boolean>(false)
-const refCurrentAnimation = ref<'Idle' | 'Walk' | 'Death' | 'Headbuff' | 'Idle_Eating' | 'Jump_Loop' | 'Jump_Start' | 'Run'>('Idle')
+const refCurrentAnimation = ref<
+  'Idle' | 'Walk' | 'Death' | 'Headbuff' | 'Idle_Eating' | 'Jump_Loop' | 'Jump_Start' | 'Run'
+>('Idle')
 
 export const useCharacterController = () => {
   /**
@@ -42,7 +44,7 @@ export const useCharacterController = () => {
         refIsMoving.value = false
         refCurrentAnimation.value = 'Idle' // Return to idle animation
         if (onComplete) onComplete()
-      }
+      },
     })
 
     // Step A: Smoothly rotate to face the destination
@@ -52,7 +54,7 @@ export const useCharacterController = () => {
       ease: 'power2.out',
       onStart: () => {
         refCurrentAnimation.value = 'Walk' // Start walk/run animation
-      }
+      },
     })
 
     // Step B: Smoothly move to target (slightly overlap with rotation for natural motion)
@@ -74,9 +76,9 @@ export const useCharacterController = () => {
         },
         onComplete: () => {
           refPosition.value = [targetX, startY, targetZ]
-        }
+        },
       },
-      '-=0.1' // Start movement 0.1s earlier
+      '-=0.1', // Start movement 0.1s earlier
     )
   }
 
@@ -85,6 +87,6 @@ export const useCharacterController = () => {
     refRotationY,
     refIsMoving,
     refCurrentAnimation,
-    moveTo
+    moveTo,
   }
 }

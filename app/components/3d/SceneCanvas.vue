@@ -9,7 +9,7 @@ import AnimeSun from './AnimeSun.vue'
 import MapGrid from './MapGrid.vue'
 
 /** Tres Data */
-const cameraPosition = new Vector3(0, 5, 18)
+const cameraPosition = new Vector3(0, 10, 25)
 const cameraLookAt = new Vector3(0, 0, 0)
 // const directionalLight = new Vector3(15, 25, 10)
 const sunPosition = new Vector3(25, 35, -40)
@@ -37,7 +37,7 @@ const cloudLayers: Array<{
 </script>
 
 <template>
-  <TresCanvas clear-color="#bae6fd" shadows window-size>
+  <TresCanvas clear-color="#bae6fd" shadows window-size :dpr="[1, 1.5]">
     <!-- 1. Perspective Camera -->
     <TresPerspectiveCamera
       :position="cameraPosition"
@@ -67,15 +67,13 @@ const cloudLayers: Array<{
       :intensity="2.2"
       color="#fef3c7"
       cast-shadow
-      :shadow-mapSize-width="2048"
-      :shadow-mapSize-height="2048"
+      :shadow-mapSize-width="1024"
+      :shadow-mapSize-height="1024"
     />
 
     <!-- Ocean visible in the foreground; distant fog blends sea into sky and softens horizon edges -->
     <TresFog color="#bae6fd" :near="35" :far="90" />
-
-    <!-- 4. Fog -->
-    <TresFog :color="'#E0F2FE'" :near="30" :far="80" />
+    <!-- <TresFog :color="'#E0F2FE'" :near="40" :far="100" /> -->
 
     <!-- 5. 3D Content Load Area (use Suspense for async loading) -->
     <Suspense>

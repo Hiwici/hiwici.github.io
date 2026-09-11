@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 const statsShimPath = new URL('./app/shims/stats-shim.ts', import.meta.url).pathname
 
@@ -14,21 +14,19 @@ export default defineNuxtConfig({
         'stats.js': statsShimPath,
       },
     },
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 
   modules: ['@tresjs/nuxt', '@pinia/nuxt'],
 
   build: {
-    transpile: ['@tresjs/cientos']
+    transpile: ['@tresjs/cientos'],
   },
 
   vue: {
     compilerOptions: {
-      isCustomElement: tag => tag.startsWith('tres-'),
+      isCustomElement: (tag) => tag.startsWith('tres-'),
       // isCustomElement: tag => tag.startsWith('Tres') || tag.startsWith('The')
-    }
-  }
+    },
+  },
 })

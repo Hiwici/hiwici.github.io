@@ -14,20 +14,23 @@ const { actions } = useAnimations(computedAnimations, computedScene)
 if (actions.Idle) actions.Idle.play()
 
 /** Watchers */
-watch(() => refCurrentAnimation.value, (newAnim, oldAnim) => {
-  const currentAction = actions[newAnim]
-  const previousAction = oldAnim ? actions[oldAnim] : undefined
+watch(
+  () => refCurrentAnimation.value,
+  (newAnim, oldAnim) => {
+    const currentAction = actions[newAnim]
+    const previousAction = oldAnim ? actions[oldAnim] : undefined
 
-  if (previousAction && currentAction) {
-    previousAction.fadeOut(0.2)
-    currentAction.reset().fadeIn(0.2).play()
-    return
-  }
+    if (previousAction && currentAction) {
+      previousAction.fadeOut(0.2)
+      currentAction.reset().fadeIn(0.2).play()
+      return
+    }
 
-  if (currentAction) {
-    currentAction.reset().fadeIn(0.2).play()
-  }
-})
+    if (currentAction) {
+      currentAction.reset().fadeIn(0.2).play()
+    }
+  },
+)
 </script>
 
 <template>
