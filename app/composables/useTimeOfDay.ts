@@ -1,21 +1,7 @@
 import gsap from 'gsap'
 import { Vector3 } from 'three'
 
-/** Interfaces for time of day configuration */
-export type TimeMode = 'day' | 'sunset' | 'night'
-// Scene properties used for time-of-day transitions
-interface TimeConfig {
-  clearColor: string // Base color for sky and fog
-  ambientColor: string // Ambient light color
-  ambientIntensity: number // Ambient light intensity
-  sunColor: string // Sun or primary light color
-  sunIntensity: number // Primary light intensity
-  sunPosition: Vector3 // Primary light 3D position
-  oceanColor: string // Ocean surface color
-  starsOpacity: number // Night-sky star opacity
-}
-// Color presets for anime-style day periods
-const presets: Record<TimeMode, TimeConfig> = {
+const dayPeriods: Record<TimeMode, TimeConfig> = {
   day: {
     clearColor: '#9ed2f7',
     ambientColor: '#eaf6ff',
@@ -48,18 +34,24 @@ const presets: Record<TimeMode, TimeConfig> = {
   },
 }
 
-// Current animated state bound to the 3D scene
-const currentMode = ref<TimeMode>('day')
-const timeState = reactive<TimeConfig>({ ...presets.day })
-
+/**
+ * Composable for managing and transitioning the time of day in the application.
+ */
 export const useTimeOfDay = () => {
+  /** Stores */
+  const mapStore = useMapStore()
+
+  /** Ref Properties */
+  const currentMode = ref<TimeMode>('day')
+  const timeState = reactive<TimeConfig>({ ...dayPeriods.day })
+
   /**
    * Smoothly transition to a target time mode
    */
   const setTimeOfDay = (mode: TimeMode) => {
     if (currentMode.value === mode) return
     currentMode.value = mode
-    const target = presets[mode]
+    const target = dayPeriods[mode]
 
     // GSAP smoothly transitions numeric fields and HEX color strings
     gsap.to(timeState, {

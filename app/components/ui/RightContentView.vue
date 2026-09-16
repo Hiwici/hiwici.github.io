@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /** Props */
 interface Props {
-  data: TileDetailData
+  data: HexModalData
 }
 const props = withDefaults(defineProps<Props>(), {
   //
@@ -33,7 +33,7 @@ const projects = [
       <h2 class="text-2xl font-black tracking-wide text-slate-800 md:text-3xl">
         {{ data.title }}
       </h2>
-      <p class="mt-1 text-sm font-bold text-sky-600">{{ data.subtitle }}</p>
+      <p v-if="data.subtitle" class="mt-1 text-sm font-bold text-sky-600">{{ data.subtitle }}</p>
     </div>
 
     <!-- Case A: About -->

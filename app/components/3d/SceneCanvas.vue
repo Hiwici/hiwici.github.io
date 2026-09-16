@@ -89,7 +89,7 @@ const computedClearColor = computed(() => timeState.clearColor)
     <!-- 4. Ocean visible in the foreground; distant fog blends sea into sky and softens horizon edges -->
     <TresFog :color="computedClearColor" :near="35" :far="90" />
 
-    <!-- 5. 3D Content Load Area (use Suspense for async loading) -->
+    <!-- 5. 3D Content Load Area -->
     <Suspense>
       <template #default>
         <TresGroup>

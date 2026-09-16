@@ -3,12 +3,22 @@
 import LeftCharacterView from './LeftCharacterView.vue'
 import RightContentView from './RightContentView.vue'
 
-const { isOpen, activeData, closeModal } = useTileModal()
+const { isHexModalOpen, activeData, closeModal } = useHexModal()
 </script>
 
 <template>
   <Teleport to="body">
-    <!-- Vue modal transition animation -->
+    <Transition
+      enter-active-class="transition-opacity ease-linear duration-200"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity ease-linear duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="isHexModalOpen" class="fixed inset-0 z-99 bg-slate-900/40 backdrop-blur-md" />
+    </Transition>
+
     <Transition
       enter-active-class="transition duration-300 ease-out"
       enter-from-class="opacity-0 scale-95"
@@ -18,17 +28,12 @@ const { isOpen, activeData, closeModal } = useTileModal()
       leave-to-class="opacity-0 scale-95"
     >
       <div
-        v-if="isOpen && activeData"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
+        v-if="isHexModalOpen && activeData"
+        class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 md:p-10"
       >
-        <!-- 1. Dimmed background overlay -->
-        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md" @click="closeModal" />
-
-        <!-- 2. Anime-style modal body (two-column layout) -->
         <div
-          class="relative z-10 grid max-h-[85vh] w-full max-w-5xl grid-cols-1 overflow-hidden rounded-3xl border-4 border-white/60 bg-white/85 shadow-2xl backdrop-blur-xl md:grid-cols-12"
+          class="relative z-10 grid max-h-[85vh] w-full max-w-5xl grid-cols-1 overflow-hidden rounded-3xl border-4 border-white/60 bg-white/85 shadow-2xl md:grid-cols-12"
         >
-          <!-- Close button (X) -->
           <button
             @click="closeModal"
             class="absolute top-4 right-4 z-20 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-slate-100 text-xl font-black text-slate-600 shadow-md transition-all duration-200 hover:rotate-90 hover:bg-rose-500 hover:text-white"
@@ -36,18 +41,16 @@ const { isOpen, activeData, closeModal } = useTileModal()
             ✕
           </button>
 
-          <!-- Left column: character showcase area (occupies 5 columns) -->
           <div
             class="relative flex flex-col items-center justify-between overflow-hidden border-b border-sky-200/60 bg-linear-to-b from-sky-100/80 to-indigo-100/80 p-6 md:col-span-5 md:border-r md:border-b-0"
           >
-            <LeftCharacterView
+            <!-- <LeftCharacterView
               :expression="activeData.expression"
               :badge-text="activeData.badgeText"
               :quote="activeData.characterQuote"
-            />
+            /> -->
           </div>
 
-          <!-- Right column: detail information panel (occupies 7 columns) -->
           <div class="max-h-[60vh] overflow-y-auto p-6 md:col-span-7 md:max-h-[85vh] md:p-8">
             <RightContentView :data="activeData" />
           </div>

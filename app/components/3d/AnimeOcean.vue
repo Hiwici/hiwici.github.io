@@ -18,13 +18,13 @@ const refNormalFrameCounter = ref(0)
 const refWaveFrameCounter = ref(0)
 
 /** Tres Data */
-const oceanPosition = new Vector3(0, -0.1, 0)
-const WAVE_SPEED = 1.5
-const WAVE_SCALE = 0.15
-const WAVE_FREQUENCY_X = 0.3
-const WAVE_FREQUENCY_Y = 0.3
-const WAVE_UPDATE_INTERVAL = 2
-const NORMAL_UPDATE_INTERVAL = 6
+const oceanPosition = new Vector3(0, 0.2, 0)
+const waveSpeed = 1.5
+const waveScale = 0.15
+const waveFrequencyX = 0.3
+const waveFrequencyY = 0.3
+const waveUpdateInterval = 2
+const normalUpdateInterval = 6
 
 /** Tres Composables */
 const { onBeforeRender } = useLoop()
@@ -34,7 +34,7 @@ onBeforeRender(({ elapsed }) => {
   if (!refElGeometry.value) return
 
   refWaveFrameCounter.value += 1
-  if (refWaveFrameCounter.value < WAVE_UPDATE_INTERVAL) return
+  if (refWaveFrameCounter.value < waveUpdateInterval) return
   refWaveFrameCounter.value = 0
 
   const positionAttribute = refElGeometry.value.attributes.position as BufferAttribute
@@ -53,8 +53,7 @@ onBeforeRender(({ elapsed }) => {
     const y = basePositions[index + 1] ?? 0
 
     // Sine-wave algorithm (combines X and Y coordinates to calculate displacement)
-    const wave =
-      Math.sin(elapsed * WAVE_SPEED + x * WAVE_FREQUENCY_X + y * WAVE_FREQUENCY_Y) * WAVE_SCALE
+    const wave = Math.sin(elapsed * waveSpeed + x * waveFrequencyX + y * waveFrequencyY) * waveScale
     positions[index + 2] = wave
   }
 
@@ -62,7 +61,7 @@ onBeforeRender(({ elapsed }) => {
 
   // Recompute normals every few frames to keep the toon look while reducing CPU cost.
   refNormalFrameCounter.value += 1
-  if (refNormalFrameCounter.value >= NORMAL_UPDATE_INTERVAL) {
+  if (refNormalFrameCounter.value >= normalUpdateInterval) {
     refElGeometry.value.computeVertexNormals()
     refNormalFrameCounter.value = 0
   }

@@ -8,6 +8,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
 
+  // https://nuxt.com/docs/4.x/guide/concepts/auto-imports#auto-imported-components
+  components: {
+    dirs: [],
+  },
+
   vite: {
     resolve: {
       alias: {
