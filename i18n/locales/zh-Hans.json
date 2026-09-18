@@ -1,0 +1,52 @@
+{
+  "Language": "语言",
+  "Time": "时间",
+  "content": {
+    "about": {
+      "Daily": "日常",
+      "Hobbie": "兴趣",
+      "daily": "白天写程序、晚上改程序，偶尔也会假装自己只是来喝咖啡的。",
+      "greeting": "👋 你好！我叫 Leo Hu，是一名全端开发者。",
+      "hobbies": "游戏、动漫、程序设计、阅读。",
+      "introduction": "简单来说，前端就是负责让画面好看，后端则是负责让功能能跑，遇到 Bug 则负责和它培养感情，偶尔与设计师讨论用户体验，享受将网站由无到有的过程。"
+    },
+    "projects": {
+      "catan": {
+        "desc": "一个使用 Nuxt 3 和 TresJS 建立的互动式网站。",
+        "tag": "3D 网页",
+        "title": "3D 卡坦岛"
+      },
+      "component_lib": {
+        "desc": "一个展示如何建立 Vue 组件库的 GitHub 仓库。",
+        "tag": "Vue 组件库",
+        "title": "Vite Vue 组件库示例"
+      },
+      "profile": {
+        "desc": "一个使用 Nuxt 3 建立的个人简介网站，具有在查看模式和代码模式之间无缝切换的功能，并支持亮色和暗色主题。",
+        "tag": "VS Code 风格",
+        "title": "个人简介网站"
+      }
+    },
+    "skills": {
+      "backend": "后端",
+      "devops": "运维",
+      "framework": "框架",
+      "frontend": "前端"
+    }
+  },
+  "content_chip": {
+    "PROFILE": "档案",
+    "STACK": "技术栈",
+    "WORK": "作品"
+  },
+  "content_title": {
+    "About": "关于我",
+    "Projects": "作品集",
+    "Skills": "专业技能"
+  },
+  "time": {
+    "day": "白天",
+    "night": "星夜",
+    "sunset": "夕阳"
+  }
+}

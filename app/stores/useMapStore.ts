@@ -75,6 +75,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'grass_land',
           title: 'Ring (0,1)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_0_-1',
@@ -115,6 +116,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'grass_land',
           title: 'Ring (-1,1)',
           interactive: false,
+          showFoam: true,
         },
         /** Ring 2 hexes */
         // North Ring 2 hexes
@@ -125,6 +127,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'snow_land',
           title: 'Ring (0,-2)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_1_-2',
@@ -132,6 +135,11 @@ export const useMapStore = defineStore('map', {
           r: -2,
           terrain_type: 'snow_land',
           title: 'Skills',
+          translatedTitle: {
+            en: 'Skills',
+            'zh-Hans': '专业技能',
+            'zh-Hant': '專業技能',
+          },
           interactive: true,
           type: 'skills',
           showItem: false,
@@ -143,6 +151,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'snow_land',
           title: 'Ring (2,-2)',
           interactive: false,
+          showFoam: true,
         },
         // West Ring 2 hexes
         {
@@ -152,6 +161,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'desert_land',
           title: 'Ring (-1,-1)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_-2_0',
@@ -159,6 +169,11 @@ export const useMapStore = defineStore('map', {
           r: 0,
           terrain_type: 'desert_land',
           title: 'About',
+          translatedTitle: {
+            en: 'About Me',
+            'zh-Hans': '关于我',
+            'zh-Hant': '關於我',
+          },
           interactive: true,
           type: 'about',
           showItem: false,
@@ -170,6 +185,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'desert_land',
           title: 'Ring (-2,1)',
           interactive: false,
+          showFoam: true,
         },
         // East Ring 2 hexes
         {
@@ -178,25 +194,31 @@ export const useMapStore = defineStore('map', {
           r: 0,
           terrain_type: 'forest_land',
           title: 'Projects',
+          translatedTitle: {
+            en: 'Projects',
+            'zh-Hans': '作品集',
+            'zh-Hant': '作品集',
+          },
           interactive: true,
           type: 'projects',
           showItem: false,
         },
         {
-          key: 'hex_2_1',
+          key: 'hex_2_-1',
           q: 2,
           r: -1,
           terrain_type: 'forest_land',
-          title: 'Ring (2,1)',
+          title: 'Ring (2,-1)',
           interactive: false,
         },
         {
-          key: 'hex_2_2',
+          key: 'hex_1_1',
           q: 1,
           r: 1,
           terrain_type: 'forest_land',
-          title: 'Ring (2,2)',
+          title: 'Ring (1,1)',
           interactive: false,
+          showFoam: true,
         },
         // South Ring 2 hexes
         // { key: 'hex_0_2', q: -1, r: 2, terrain_type: 'grass_land', title: 'Ring (0,2)', interactive: false },
@@ -244,6 +266,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'desert_land',
           title: 'Ring (-2,-1)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_-3_0',
@@ -252,6 +275,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'desert_land',
           title: 'Ring (-3,0)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_-3_1',
@@ -260,6 +284,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'desert_land',
           title: 'Ring (-3,1)',
           interactive: false,
+          showFoam: true,
         },
         // East Ring 3 hexes
         {
@@ -269,6 +294,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'forest_land',
           title: 'Ring (2,1)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_3_0',
@@ -277,6 +303,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'forest_land',
           title: 'Ring (3,0)',
           interactive: false,
+          showFoam: true,
         },
         {
           key: 'hex_3_-1',
@@ -285,6 +312,7 @@ export const useMapStore = defineStore('map', {
           terrain_type: 'forest_land',
           title: 'Ring (3,-1)',
           interactive: false,
+          showFoam: true,
         },
         /** Ring 4 hexes */
         // North Ring 4 hexes

@@ -15,15 +15,20 @@ const refRing1 = ref<Mesh>()
 const refRing2 = ref<Mesh>()
 const refMat1 = ref<MeshBasicMaterial>()
 const refMat2 = ref<MeshBasicMaterial>()
+const refUpdateAccumulator = ref(0)
 
 /** Tres Data */
-const foamPosition = new Vector3(props.position[0], 0.25, props.position[2])
+const foamPosition = new Vector3(props.position[0], 0.3, props.position[2])
 
 /** Tres Composables */
 const { onBeforeRender } = useLoop()
 
 // Dual expanding foam-ripple animation in anime style
-onBeforeRender(({ elapsed }) => {
+onBeforeRender(({ elapsed, delta }) => {
+  refUpdateAccumulator.value += delta
+  if (refUpdateAccumulator.value < 1 / 30) return
+  refUpdateAccumulator.value = 0
+
   const speed = 0.3 // Ripple expansion speed (cycles/second)
   const maxScale = 0.25 // Maximum expansion amount (1.0 -> 1.25)
 

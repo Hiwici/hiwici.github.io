@@ -1,14 +1,13 @@
 <script setup lang="ts">
 /** Components */
-import DetailModal from '~/components/ui/DetailModal.vue'
+import ActionBar from '~/components/ui/ActionBar.vapor.vue'
+import DetailModal from '~/components/ui/DetailModal.vapor.vue'
 import SceneCanvas from '~/components/3d/SceneCanvas.vue'
-import TimeToggle from '~/components/ui/TimeToggle.vue'
 </script>
 
 <template>
   <main class="relative h-screen w-screen overflow-hidden bg-sky-100 select-none">
-    <!-- 1. Day/Night Toggle UI -->
-    <TimeToggle />
+    <ActionBar />
 
     <!-- 2. Fullscreen 3D Catan Island Scene -->
     <ClientOnly>

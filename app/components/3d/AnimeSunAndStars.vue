@@ -9,8 +9,8 @@ const { onBeforeRender } = useLoop()
 const { timeState } = useTimeOfDay()
 
 /** Tres Data */
-// Build a night sky star field (1000 anime-style twinkling stars)
-const starCount = 1000
+// Build a night sky star field with moderate density to keep GPU load lower.
+const starCount = 600
 const starPositions = new Float32Array(starCount * 3)
 
 for (let i = 0; i < starCount; i++) {
@@ -21,18 +21,20 @@ for (let i = 0; i < starCount; i++) {
 
 /** Ref Element Properties */
 const refElStars = ref<Points>()
+const refUpdateAccumulator = ref(0)
 
-onBeforeRender(({ elapsed }) => {
+onBeforeRender(({ elapsed, delta }) => {
+  refUpdateAccumulator.value += delta
+  if (refUpdateAccumulator.value < 1 / 30) return
+  refUpdateAccumulator.value = 0
+
   if (refElStars.value) {
     refElStars.value.rotation.y = elapsed * 0.005 // Very slow star-field rotation
   }
 })
 
 /** Computed Properties */
-const computedSunPosition = computed(() => {
-  const { x, y, z } = timeState.sunPosition
-  return new Vector3(x, y, z)
-})
+const computedSunPosition = computed(() => timeState.sunPosition)
 const computedSunColor = computed(() => timeState.sunColor)
 const computedStarsOpacity = computed(() => timeState.starsOpacity)
 </script>

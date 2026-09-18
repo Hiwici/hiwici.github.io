@@ -44,15 +44,21 @@ const computedAmbientColor = computed(() => timeState.ambientColor)
 const computedAmbientIntensity = computed(() => timeState.ambientIntensity)
 const computedSunColor = computed(() => timeState.sunColor)
 const computedSunIntensity = computed(() => timeState.sunIntensity)
-const computedSunPosition = computed(() => {
-  const { x, y, z } = timeState.sunPosition
-  return new Vector3(x, y, z)
-})
+const computedSunPosition = computed(() => timeState.sunPosition)
 const computedClearColor = computed(() => timeState.clearColor)
+
+/** Composables */
+const { loadFont } = useFont()
+
+/** onMounted Hook */
+onMounted(async () => {
+  // Do something
+  await loadFont('/fonts/NotoSansTC-VariableFont_wght.ttf')
+})
 </script>
 
 <template>
-  <TresCanvas clear-color="#bae6fd" shadows window-size :dpr="[1, 1.5]">
+  <TresCanvas clear-color="#bae6fd" shadows window-size :dpr="[1, 1.25]">
     <!-- 1. Perspective Camera -->
     <TresPerspectiveCamera
       :position="cameraPosition"
@@ -82,8 +88,8 @@ const computedClearColor = computed(() => timeState.clearColor)
       :intensity="computedSunIntensity"
       :color="computedSunColor"
       cast-shadow
-      :shadow-mapSize-width="1024"
-      :shadow-mapSize-height="1024"
+      :shadow-mapSize-width="512"
+      :shadow-mapSize-height="512"
     />
 
     <!-- 4. Ocean visible in the foreground; distant fog blends sea into sky and softens horizon edges -->

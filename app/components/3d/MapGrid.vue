@@ -13,6 +13,9 @@ const { openModal } = useHexModal()
 /** Ref Properties */
 const refSelectedHex = ref<HexData | null>(null)
 
+/** Computed Properties */
+const computedHexList = computed(() => mapStore.getHexData())
+
 /**
  * Handles the click event on a tile. Updates the selected tile ID and calculates the target world position.
  */
@@ -21,7 +24,7 @@ const handleHexClick = (hex: HexData) => {
 
   refSelectedHex.value = hex
 
-  const hexList = mapStore.getHexData()
+  const hexList = computedHexList.value
   const startHex = findNearestHex(refPosition.value, hexList)
 
   if (!startHex) return
@@ -53,8 +56,8 @@ const handleHexClick = (hex: HexData) => {
 <template>
   <TresGroup>
     <BiomeHex
-      v-for="(hex, hexIndex) in mapStore.getHexData()"
-      :key="hexIndex"
+      v-for="hex in computedHexList"
+      :key="hex.key"
       :hex="hex"
       :radius="HEX_RADIUS"
       @click="handleHexClick(hex)"

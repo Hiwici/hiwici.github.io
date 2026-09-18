@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Vector3 } from 'three'
+import { Vector3, Group } from 'three'
 import { Billboard, Text3D } from '@tresjs/cientos'
 /** Components */
 import HexFoam from '../HexFoam.vue'
@@ -23,9 +23,18 @@ const emit = defineEmits<{
   (e: 'click'): void
 }>()
 
+/** Store */
+const localeStore = useLocaleStore()
+
+/** Tres Composables */
+const { invalidate } = useTres()
+
 /** Composables */
 const { hexToWorld } = useHexData()
-const { isHexModalOpen } = useHexModal()
+const { font } = useFont()
+
+/** Ref Element Properties */
+const refElText3DGroup = ref<Group>()
 
 /** Ref Properties */
 const refIsHover = ref(false)
@@ -68,13 +77,10 @@ const handleClick = (e: PointerEvent) => {
 const getTextColor = (terrain_type: TerrainType) => {
   switch (terrain_type) {
     case 'grass_land':
-      return '#4ade80'
     case 'desert_land':
-      return '#fb923c'
     case 'snow_land':
-      return '#f8fafc'
     case 'forest_land':
-      return '#15803d'
+      return '#64748b'
     default:
       return '#000000'
   }
@@ -96,6 +102,15 @@ const computedTopCapCenterPosition = computed(() => {
   const centerY = computedBaseHeight.value + topCapHeight / 2
   return new Vector3(0, centerY, 0)
 })
+const computedTitle = computed(() => {
+  return props.hex.translatedTitle?.[localeStore.locale] || props.hex.title
+})
+
+watch(computedTitle, async () => {
+  await nextTick()
+  refElText3DGroup.value?.updateMatrixWorld(true)
+  invalidate()
+})
 </script>
 
 <template>
@@ -113,26 +128,28 @@ const computedTopCapCenterPosition = computed(() => {
       @click="handleClick"
     >
       <!-- 1. BASE CLIFF / DIRT LAYER (Bottom Hex) -->
-      <TresMesh :position="computedBaseCenterPosition" cast-shadow receive-shadow>
+      <TresMesh :position="computedBaseCenterPosition" receive-shadow>
         <TresCylinderGeometry :args="[props.radius, props.radius, computedBaseHeight, 6]" />
         <TresMeshToonMaterial :color="props.baseColor" />
       </TresMesh>
 
       <!-- 2. TOP BIOME COVER (Grass / Sand / Snow Layer) -->
-      <TresMesh :position="computedTopCapCenterPosition" cast-shadow receive-shadow>
+      <TresMesh :position="computedTopCapCenterPosition" receive-shadow>
         <!-- Slightly inset top radius (radius * 0.98) for stylized bevel edge -->
         <TresCylinderGeometry :args="[props.radius * 0.98, props.radius, topCapHeight, 6]" />
         <TresMeshToonMaterial :color="props.topColor" />
       </TresMesh>
 
-      <Billboard v-if="props.hex.type && !isHexModalOpen" :position="[0, 1.2, 0]">
-        <Text3D font="/fonts/helvetiker_regular.typeface.json" :text="props.hex.title" :size="0.5">
-          <TresMeshStandardMaterial
-            :color="getTextColor(props.hex.terrain_type)"
-            :roughness="0.3"
-          />
-        </Text3D>
-      </Billboard>
+      <TresGroup ref="refElText3DGroup">
+        <Billboard v-if="props.hex.type" :position="[0, 1.5, 0]">
+          <Text3D v-if="font" :key="computedTitle" :font="font" :text="computedTitle" :size="0.5">
+            <TresMeshStandardMaterial
+              :color="getTextColor(props.hex.terrain_type)"
+              :roughness="0.3"
+            />
+          </Text3D>
+        </Billboard>
+      </TresGroup>
 
       <slot />
     </TresGroup>

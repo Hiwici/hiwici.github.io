@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import i18n from './config/i18n'
 
 const statsShimPath = new URL('./app/shims/stats-shim.ts', import.meta.url).pathname
 
@@ -22,7 +23,10 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ['@tresjs/nuxt', '@pinia/nuxt'],
+  modules: ['@tresjs/nuxt', '@pinia/nuxt', '@nuxtjs/i18n'],
+
+  // https://i18n.nuxtjs.org/docs/getting-started
+  i18n: i18n,
 
   build: {
     transpile: ['@tresjs/cientos'],

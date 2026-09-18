@@ -34,27 +34,39 @@ const dayPeriods: Record<TimeMode, TimeConfig> = {
   },
 }
 
+/** Shared State */
+let refTimeState: TimeConfig | null = null
+
 /**
  * Composable for managing and transitioning the time of day in the application.
  */
 export const useTimeOfDay = () => {
   /** Stores */
-  const mapStore = useMapStore()
+  const timeStore = useTimeStore()
 
   /** Ref Properties */
-  const currentMode = ref<TimeMode>('day')
-  const timeState = reactive<TimeConfig>({ ...dayPeriods.day })
+  if (!refTimeState) {
+    refTimeState = reactive<TimeConfig>({ ...dayPeriods[timeStore.time] })
+  }
 
   /**
    * Smoothly transition to a target time mode
    */
   const setTimeOfDay = (mode: TimeMode) => {
-    if (currentMode.value === mode) return
-    currentMode.value = mode
+    if (!refTimeState) return
+
     const target = dayPeriods[mode]
 
+    if (!target) return
+    if (timeStore.time !== mode) {
+      timeStore.setTime(mode)
+    }
+
+    gsap.killTweensOf(refTimeState)
+    gsap.killTweensOf(refTimeState.sunPosition)
+
     // GSAP smoothly transitions numeric fields and HEX color strings
-    gsap.to(timeState, {
+    gsap.to(refTimeState, {
       clearColor: target.clearColor,
       ambientColor: target.ambientColor,
       ambientIntensity: target.ambientIntensity,
@@ -66,19 +78,18 @@ export const useTimeOfDay = () => {
       ease: 'power2.inOut',
     })
 
-    // GSAP interpolates the 3D light position [X, Y, Z]
-    gsap.to(timeState.sunPosition, {
-      0: target.sunPosition.x,
-      1: target.sunPosition.y,
-      2: target.sunPosition.z,
+    // GSAP interpolates the 3D light position
+    gsap.to(refTimeState.sunPosition, {
+      x: target.sunPosition.x,
+      y: target.sunPosition.y,
+      z: target.sunPosition.z,
       duration: 1.5,
       ease: 'power2.inOut',
     })
   }
 
   return {
-    currentMode,
-    timeState,
+    timeState: refTimeState,
     setTimeOfDay,
   }
 }
