@@ -44,7 +44,6 @@ export const useLocaleStore = defineStore('locale', {
       return [
         { key: 'locale-en', label: 'English', value: 'en' },
         { key: 'locale-zh-Hant', label: '繁體中文', value: 'zh-Hant' },
-        // { key: 'locale-zh-Hans', label: '简体中文', value: 'zh-Hans' },
       ]
     },
   },

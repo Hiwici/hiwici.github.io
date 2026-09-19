@@ -1,12 +1,12 @@
 import type { Vector3 } from 'three/src/math/Vector3.js'
 
-export type LocaleCode = 'en' | 'zh-Hans' | 'zh-Hant'
+export type LocaleCode = 'en' | 'zh-Hant'
 
 export type TimeMode = 'day' | 'sunset' | 'night'
 
 export type TerrainType = 'grass_land' | 'desert_land' | 'snow_land' | 'forest_land'
 
-export type HexModelType = 'about' | 'skills' | 'projects' | 'contact'
+export type HexModelType = 'about' | 'skills' | 'projects'
 
 // Scene properties used for time-of-day transitions
 export interface TimeConfig {

@@ -11,16 +11,6 @@
       "introduction": "簡單來說，前端就是負責讓畫面好看，後端則是負責讓功能能跑，遇到 Bug 則負責和它培養感情，偶爾與設計師討論使用者體驗，享受將網站由無到有的過程。"
     },
     "projects": {
-      "catan": {
-        "desc": "一個使用 Nuxt 3 和 TresJS 建立的互動式網站。",
-        "tag": "3D 網頁",
-        "title": "3D 卡坦島"
-      },
-      "component_lib": {
-        "desc": "一個展示如何建立 Vue 元件庫的 GitHub 倉庫。",
-        "tag": "Vue 元件庫",
-        "title": "Vite Vue 元件庫範例"
-      },
       "profile": {
         "desc": "一個使用 Nuxt 3 建立的個人簡介網站，具有在檢視模式和程式碼模式之間無縫切換的功能，並支援亮色和暗色主題。",
         "tag": "VS Code 風格",

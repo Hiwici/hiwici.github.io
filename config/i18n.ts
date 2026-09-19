@@ -13,8 +13,7 @@ const i18n = {
   },
   locales: [
     { code: 'en', name: 'English', file: 'en.json' },
-    { code: 'zh-Hans', name: '简体中文', file: 'zh-Hans.json' },
-    // { code: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
+    { code: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
   ],
   lazy: true,
 }

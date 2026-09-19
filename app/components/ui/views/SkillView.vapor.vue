@@ -51,7 +51,7 @@ const { tt } = useAppI18n()
 
 <template>
   <section
-    class="relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur-sm sm:p-5"
+    class="relative overflow-hidden rounded-xl border border-slate-200/70 bg-white/80 p-4 shadow-sm backdrop-blur-sm sm:p-5"
   >
     <div
       class="pointer-events-none absolute -top-16 -left-16 h-40 w-40 rounded-full bg-cyan-200/25 blur-2xl"

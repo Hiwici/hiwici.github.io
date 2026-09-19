@@ -11,16 +11,6 @@
       "introduction": "In short, the front end is responsible for making the interface look good, the back end is responsible for making the functionality work, when encountering bugs I am responsible for developing a relationship with them, occasionally discussing user experience with designers, and enjoying the process of creating a website from scratch."
     },
     "projects": {
-      "catan": {
-        "desc": "An interactive website built with Nuxt 3 and TresJS.",
-        "tag": "3D Web",
-        "title": "3D Catan Portfolio"
-      },
-      "component_lib": {
-        "desc": "A github repository for how to create a Vue library.",
-        "tag": "Vue Library",
-        "title": "Vite Vue Library Example"
-      },
       "profile": {
         "desc": "A personal profile website built with Nuxt 3, featuring seamless switching between view and code modes, along with support for light and dark themes.",
         "tag": "VS Code Style",
