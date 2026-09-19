@@ -27,3 +27,4 @@ logs
 .vscode
 *.local
 *.bak
+.github/prompts
