@@ -23,6 +23,16 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
+  // Pre-renders the site into static HTML/CSS/JS
+  nitro: {
+    preset: 'github-pages',
+  },
+
+  app: {
+    // Hosted at the root, so baseURL stays '/'
+    baseURL: '/',
+  },
+
   modules: ['@tresjs/nuxt', '@pinia/nuxt', '@nuxtjs/i18n'],
 
   // https://i18n.nuxtjs.org/docs/getting-started
@@ -36,6 +46,13 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => tag.startsWith('tres-'),
       // isCustomElement: tag => tag.startsWith('Tres') || tag.startsWith('The')
+    },
+  },
+
+  runtimeConfig: {
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'https://hiwici.github.io',
     },
   },
 })
