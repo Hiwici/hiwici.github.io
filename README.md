@@ -1,75 +1,32 @@
-# Nuxt Minimal Starter
+# Hiwici GitHub Pages
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This repository contains the source code for my personal GitHub Pages website.
 
-## Setup
+## Tech stack
 
-Make sure to install dependencies:
+- Nuxt 4
+- TresJS
+- TypeScript
+- Tailwind CSS 4 (via Vite plugin)
+- Pinia (state management)
 
-```bash
-# npm
-npm install
+## Project structure
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+```text
+app/
+ | assets/          Global styles and visual assets
+ | components/      Reusable UI building blocks (layout + shared)
+ | composables/     Reusable composition functions
+ | pages/           Route pages (entry route at app/pages/index.vue)
+ | plugins/         Nuxt plugins and third-party integrations
+ | stores/          Pinia stores (tabs, theme, profile info)
+ | utils/           Utility functions and helpers
+config/          Configuration files for the project
+i18n/            Internationalization files (translations)
+public/          Static files (icons, images, robots.txt)
+shared/          Shared resources and assets
 ```
 
-## Development Server
+## License
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+See the `LICENSE` file for details.
