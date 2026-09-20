@@ -1,0 +1,42 @@
+{
+  "Language": "Language",
+  "Time": "Time",
+  "content": {
+    "about": {
+      "Daily": "Daily",
+      "Hobbie": "Hobbie",
+      "daily": "During the day I write code, at night I modify code, and occasionally I pretend that I am just here to drink coffee.",
+      "greeting": "👋 Hello! My name is Leo Hu, and I am a full-stack developer.",
+      "hobbies": "Games, anime, programming, reading.",
+      "introduction": "In short, the front end is responsible for making the interface look good, the back end is responsible for making the functionality work, when encountering bugs I am responsible for developing a relationship with them, occasionally discussing user experience with designers, and enjoying the process of creating a website from scratch."
+    },
+    "projects": {
+      "profile": {
+        "desc": "A personal profile website built with Nuxt 3, featuring seamless switching between view and code modes, along with support for light and dark themes.",
+        "tag": "VS Code Style",
+        "title": "Profile Website"
+      }
+    },
+    "skills": {
+      "backend": "Backend",
+      "devops": "DevOps",
+      "framework": "Framework",
+      "frontend": "Frontend"
+    }
+  },
+  "content_chip": {
+    "PROFILE": "PROFILE",
+    "STACK": "STACK",
+    "WORK": "WORK"
+  },
+  "content_title": {
+    "About": "About Me",
+    "Projects": "Projects",
+    "Skills": "Skills"
+  },
+  "time": {
+    "day": "Day",
+    "night": "Night",
+    "sunset": "Sunset"
+  }
+}

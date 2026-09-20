@@ -1,0 +1,42 @@
+{
+  "Language": "語言",
+  "Time": "時間",
+  "content": {
+    "about": {
+      "Daily": "日常",
+      "Hobbie": "興趣",
+      "daily": "白天寫程式、晚上改程式，偶爾也會假裝自己只是來喝咖啡的。",
+      "greeting": "👋 哈囉！我叫 Leo Hu，是一名全端開發者。",
+      "hobbies": "遊戲、動漫、程式設計、閱讀。",
+      "introduction": "簡單來說，前端就是負責讓畫面好看，後端則是負責讓功能能跑，遇到 Bug 則負責和它培養感情，偶爾與設計師討論使用者體驗，享受將網站由無到有的過程。"
+    },
+    "projects": {
+      "profile": {
+        "desc": "一個使用 Nuxt 3 建立的個人簡介網站，具有在檢視模式和程式碼模式之間無縫切換的功能，並支援亮色和暗色主題。",
+        "tag": "VS Code 風格",
+        "title": "個人簡介網站"
+      }
+    },
+    "skills": {
+      "backend": "後端",
+      "devops": "運維",
+      "framework": "框架",
+      "frontend": "前端"
+    }
+  },
+  "content_chip": {
+    "PROFILE": "檔案",
+    "STACK": "技術棧",
+    "WORK": "作品"
+  },
+  "content_title": {
+    "About": "關於我",
+    "Projects": "作品集",
+    "Skills": "專業技能"
+  },
+  "time": {
+    "day": "白天",
+    "night": "星夜",
+    "sunset": "夕陽"
+  }
+}
