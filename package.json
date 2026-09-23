@@ -28,6 +28,7 @@
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
+    "@types/node": "^26.6.2",
     "@types/three": "^0.185.4",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1"

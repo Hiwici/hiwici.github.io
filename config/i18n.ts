@@ -1,3 +1,5 @@
+import type { NuxtI18nOptions } from '@nuxtjs/i18n'
+
 /**
  * i18n configuration
  *
@@ -16,6 +18,6 @@ const i18n = {
     { code: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
   ],
   lazy: true,
-}
+} as NuxtI18nOptions
 
 export default i18n

@@ -5,9 +5,13 @@ import { Vector3 } from 'three'
 import AnimeCharacter from './AnimeCharacter.vue'
 import AnimeCloud from './AnimeCloud.vue'
 import AnimeOcean from './AnimeOcean.vue'
-// import AnimeSun from './AnimeSun.vue'
 import AnimeSunAndStars from './AnimeSunAndStars.vue'
 import MapGrid from './MapGrid.vue'
+
+/** Emits */
+const emit = defineEmits<{
+  (e: 'ready'): void
+}>()
 
 /** Composables */
 const { timeState } = useTimeOfDay()
@@ -15,8 +19,6 @@ const { timeState } = useTimeOfDay()
 /** Tres Data */
 const cameraPosition = new Vector3(0, 10, 25)
 const cameraLookAt = new Vector3(0, 0, 0)
-// const directionalLight = new Vector3(15, 25, 10)
-const sunPosition = new Vector3(25, 35, -40)
 
 /** Cloud Layers */
 const cloudLayers: Array<{
@@ -47,13 +49,39 @@ const computedSunIntensity = computed(() => timeState.sunIntensity)
 const computedSunPosition = computed(() => timeState.sunPosition)
 const computedClearColor = computed(() => timeState.clearColor)
 
+/** Ref Properties */
+const refIsFontReady = ref<boolean>(false)
+const refIsSceneReady = ref<boolean>(false)
+const refHasEmittedReady = ref<boolean>(false)
+
 /** Composables */
 const { loadFont } = useFont()
 
+/** Handlers */
+const handleEmitReady = () => {
+  if (refHasEmittedReady.value || !refIsFontReady.value || !refIsSceneReady.value) {
+    return
+  }
+
+  refHasEmittedReady.value = true
+  emit('ready')
+}
+
+const handleSceneResolved = () => {
+  refIsSceneReady.value = true
+  handleEmitReady()
+}
+
 /** onMounted Hook */
 onMounted(async () => {
-  // Do something
-  await loadFont('/fonts/NotoSansTC-VariableFont_wght.ttf')
+  try {
+    await loadFont('/fonts/NotoSansTC-VariableFont_wght.ttf')
+  } catch (error) {
+    console.error('Font preload failed:', error)
+  } finally {
+    refIsFontReady.value = true
+    handleEmitReady()
+  }
 })
 </script>
 
@@ -96,7 +124,7 @@ onMounted(async () => {
     <TresFog :color="computedClearColor" :near="35" :far="90" />
 
     <!-- 5. 3D Content Load Area -->
-    <Suspense>
+    <Suspense @resolve="handleSceneResolved">
       <template #default>
         <TresGroup>
           <!-- Sun and stars component -->
@@ -118,19 +146,6 @@ onMounted(async () => {
           <MapGrid />
           <AnimeCharacter />
         </TresGroup>
-      </template>
-
-      <template #fallback>
-        <Html center>
-          <div
-            class="flex flex-col items-center justify-center rounded-xl bg-white/80 p-4 shadow-lg backdrop-blur-md"
-          >
-            <div
-              class="mb-2 h-6 w-6 animate-spin rounded-full border-2 border-sky-500 border-t-transparent"
-            ></div>
-            <span class="text-xs font-bold tracking-wider text-sky-700">Loading...</span>
-          </div>
-        </Html>
       </template>
     </Suspense>
   </TresCanvas>

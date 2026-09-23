@@ -62,7 +62,7 @@ const initAutoPlay = () => {
 
 /**
  * Handles user interactions such as navigation and touch events.
- */ 
+ */
 const handlePrev = () => {
   if (!computedHasMultiple.value) return
   const total = computedImages.value.length
